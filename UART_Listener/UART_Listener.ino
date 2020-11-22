@@ -26,23 +26,51 @@
   #define DEBUG_PRINT(x)
   #define DEBUG_PRINTLN(x)
 #endif
+const byte arrayLength = 3;
+byte serial1Array[arrayLength];
+byte serial2Array[arrayLength];
 
 void setup() {
   // initialize both serial ports:
   Serial.begin(9600);
-  Serial1.begin(9600);
+  Serial1.begin(9600);                /*19(RX), 18(TX)*/
+  Serial2.begin(9600);                /*17(RX), 16(TX)*/
 }
 
 void loop() {
-  // read from port 1, send to port 0:
-  if (Serial1.available()) {
-    int inByte = Serial1.read();
-    Serial.write(inByte);
-  }
+  serial1Read();
+  serial2Read();
+  printSerial1Bytes();
+  printSerial2Bytes();
+  Serial.println();
+}
 
-  // read from port 0, send to port 1:
-  if (Serial.available()) {
-    int inByte = Serial.read();
-    Serial1.write(inByte);
+void printSerial1Bytes(){
+  Serial.print("serial1: ");
+  for (byte i = 0; i < arrayLength; i++) {
+    Serial.print(serial1Array[i]);
+    Serial.print(" ");
+    Serial.print("/t");
+  }
+}
+
+void printSerial2Bytes(){
+  Serial.print("serial2: ");
+  for (byte i = 0; i < arrayLength; i++) {
+    Serial.print(serial2Array[i]);
+    Serial.print(" ");
+    Serial.print("/t");
+  }
+}
+
+void serial1Read(){
+  if (Serial1.available()) {
+    Serial1.readBytes(serial1Array, arrayLength);
+  }
+}
+
+void serial2Read(){
+  if (Serial2.available()) {
+    Serial2.readBytes(serial2Array, arrayLength);
   }
 }
