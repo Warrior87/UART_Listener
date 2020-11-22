@@ -13,17 +13,19 @@ byte serial2Array[arrayLength];
 
 void setup() {
   // initialize both serial ports:
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial1.begin(9600);                /*19(RX), 18(TX)*/
   Serial2.begin(9600);                /*17(RX), 16(TX)*/
 }
 
 void loop() {
-  serial1Read();
-  serial2Read();
-  printSerial1Bytes();
-  printSerial2Bytes();
-  Serial.println();
+  if((Serial1.available() > 0) || (Serial2.available() > 0)){
+    serial1Read();
+    serial2Read();
+    printSerial1Bytes();
+    printSerial2Bytes();
+    Serial.println();
+  }
 }
 
 void printSerial1Bytes(){
@@ -31,7 +33,7 @@ void printSerial1Bytes(){
   for (byte i = 0; i < arrayLength; i++) {
     Serial.print(serial1Array[i]);
     Serial.print(" ");
-    Serial.print("/t");
+    Serial.print("\t");
   }
 }
 
@@ -40,7 +42,7 @@ void printSerial2Bytes(){
   for (byte i = 0; i < arrayLength; i++) {
     Serial.print(serial2Array[i]);
     Serial.print(" ");
-    Serial.print("/t");
+    Serial.print("\t");
   }
 }
 
