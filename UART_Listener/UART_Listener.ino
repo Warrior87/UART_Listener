@@ -7,7 +7,7 @@
   #define DEBUG_PRINT(x)
   #define DEBUG_PRINTLN(x)
 #endif
-const byte arrayLength = 3;
+const byte arrayLength = 4;
 byte serial1Array[arrayLength];
 byte serial2Array[arrayLength];
 
@@ -32,7 +32,7 @@ void loop() {
 void printSerial1Bytes(){
   Serial.print("serial1: ");
   for (byte i = 0; i < arrayLength; i++) {
-    Serial.print(serial1Array[i]);
+    Serial.print(serial1Array[i], HEX);
     Serial.print(" ");
     Serial.print("\t");
   }
@@ -41,7 +41,7 @@ void printSerial1Bytes(){
 void printSerial2Bytes(){
   Serial.print("serial2: ");
   for (byte i = 0; i < arrayLength; i++) {
-    Serial.print(serial2Array[i]);
+    Serial.print(serial2Array[i], HEX);
     Serial.print(" ");
     Serial.print("\t");
   }
