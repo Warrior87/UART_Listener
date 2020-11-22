@@ -24,6 +24,7 @@ void loop() {
     serial2Read();
     printSerial1Bytes();
     printSerial2Bytes();
+    printTimestamp();
     Serial.println();
   }
 }
@@ -56,4 +57,8 @@ void serial2Read(){
   if (Serial2.available()) {
     Serial2.readBytes(serial2Array, arrayLength);
   }
+}
+
+void printTimestamp(){
+  Serial.print(millis());
 }
