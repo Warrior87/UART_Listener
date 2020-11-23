@@ -19,7 +19,7 @@ void setup() {
 }
 
 void loop() {
-  if((Serial1.available() > 0) || (Serial2.available() > 0)){
+  if((Serial1.available() > 3) || (Serial2.available() > 3)){
     serial1Read();
     serial2Read();
     printSerial1Bytes();
